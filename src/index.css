@@ -1,13 +1,112 @@
-body {
+
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  border: none;
+  outline: none;
+  list-style: none;
+  box-sizing: border-box;
+
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.container {
+  width: 400px;
+  background: black;
+  padding: 1rem;
+  margin: 3rem auto;
+  border-radius: 5px;
+}
+.container h1 {
+  text-align: center;
+  color: rgb(161, 160, 160);
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-weight: 400;
+  padding: 2.4rem 0;
+}
+
+.inputField {
+  width: 100%;
+  padding: 5px 1rem;
+  background: whitesmoke;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.inputField input {
+  background: transparent;
+  padding: 10px;
+  color: rgb(161, 160, 160);
+  font-size: 1rem;
+}
+.inputField input::placeholder {
+  color: rgb(161, 160, 160);
+}
+
+.inputField button {
+  background: black;
+  color: #fff;
+  font-size: 1rem;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10%;
+}
+
+
+/* to do list style */
+.toDoList {
+  margin-top: 2rem;
+}
+.toDoList span {
+  color: rgb(161, 160, 160);
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.toDoList .list-items {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+.list-items .items {
+  background: white;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: black;
+}
+input[type='checkbox'] {
+  padding: 5px;
+}
+.items-text {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.notify {
+  text-align: center;
+  color: rgb(161, 160, 160);
+}
+
+.isChecked {
+  text-decoration: line-through;
+}
+
+.stats {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  background:black;
 }
