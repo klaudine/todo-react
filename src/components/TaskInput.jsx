@@ -1,29 +1,26 @@
 import React, { useState } from 'react'
 
-const TaskInput = ({ addTask }) => {
+const TaskInput = ({ updateData, toDoList, setToDoList }) => {
     const [task, setTask] = useState('');
-
-    function handleInputValue(event) {
-        setTask(event.target.value);
+    const addToDo = () => {
+      let newToDoList = [...toDoList, {label: task, done:false}]
+      setToDoList(newToDoList)
+      updateData(newToDoList) 
     }
-
-    function handleAddTask(event){
-        event.preventDefault();
-        if(task.trim() === '') return;
-        addTask(task);
-        setTask('');
-    }
-
+const deleteAll = () => {
+  setToDoList([])
+  updateData([])
+}
 
   return (
-    <form className='inputField' onSubmit={handleAddTask}>
+    <div className='inputField'>
         <input type='text'
         value={task}
         placeholder='Add a todo item'
-        onChange={handleInputValue} />
-        <button className='add'>+</button>
-        <button className='btn2'>Delete All</button>
-    </form>
+        onChange={(e) => setTask (e.target.value)} />
+        <button type='submit' className='add' onClick={()=> addToDo()}>+</button>
+        <button className='btn2'onClick={()=> deleteAll()} >Delete All</button>
+    </div>
   )
 }
 

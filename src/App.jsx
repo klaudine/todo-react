@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TaskInput from "./components/TaskInput";
-import TaskItem from "./components/TaskItem";
 import Stats from "./components/Stats";
+import ToDoList from "./components/ToDoList";
 
 
 function App() {
@@ -20,47 +20,23 @@ useEffect(() => {
 
       console.log(data);
     } catch(err) {
-      console.err(err);
+      console.log(err);
     }
   }
   getData()
 })
 
-  useEffect(() => {
-    const request = async () => {
-      try {
-        const res = await fetch("https://playground.4geeks.com/apis/fake/todos/user/klaudine", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify([]),
-        })
-        const data = await res.json();
 
-        if(!res.ok) {
-          console.log(data.description);
-          return;
-        }
-        console.log(data);
 
-      } catch(err) {
-        console.err(err)
-      }
-    }
-    request()
-  }, [])
-  
 
-  useEffect(() => {
-    const updateData = async () => {
+    const updateData = async (newArray) => {
       try {
         const res = await fetch("https://playground.4geeks.com/apis/fake/todos/user/klaudine", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify([]),
+        body: JSON.stringify(newArray),
         })
         const data = await res.json();
 
@@ -71,71 +47,21 @@ useEffect(() => {
         console.log(data);
 
       } catch(err) {
-        console.err(err)
+        console.log(err)
       }
     }
-    updateData()
-  }, [])
 
-  useEffect(() => {
-    const deleteAll = async () => {
-      try {
-        const res = await fetch("https://playground.4geeks.com/apis/fake/todos/user/klaudine", {
-        method: "DELETE"
-      })
-        const data = await res.json();
-
-        if(!res.ok) {
-          console.log(data.description);
-          return;
-        }
-        console.log(data);
-
-      } catch(err) {
-        console.err(err)
-      }
-    }
-    deleteAll()
-  }, [])
-
-
-
-const addTask = (taskName) => {
-  const newTask = { taskName, checked: false };
-  setToDoList([...toDoList, newTask])
-};
-
-function deleteTask(deleteTaskName) {
-  setToDoList(toDoList.filter(task=> task.taskName !== deleteTaskName));
-}
-
-function toggleCheck(taskName){
-  setToDoList((prevToDoList) =>
-  prevToDoList.map((task) =>
-    task.taskName === taskName ? { ...task, checked: !task.checked } : task,
-    ),
-  );
-}
 
   return (
     <>
     <div className='container'>
       <h1>Todo List</h1>
       
-      <TaskInput addTask={addTask} />
+      <TaskInput toDoList={toDoList} setToDoList={setToDoList} updateData={updateData} />
 
       <div className="toDoList">
         <span>To do</span>
-        <ul className="list-items">
-          {toDoList.map((task, key) => (
-          <TaskItem
-          task={task}
-          key={key}
-          deleteTask={deleteTask}
-          toggleCheck={toggleCheck}/>
-          ))}
-
-        </ul>
+        <ToDoList toDoList={toDoList} setToDoList={setToDoList} updateData={updateData}/>
 
         {toDoList.length === 0 ? (<p className="notify">All tasks completed!</p>) : null}
       </div>
