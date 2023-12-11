@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 
 const TaskInput = ({ addTask }) => {
     const [task, setTask] = useState('');
@@ -21,7 +21,8 @@ const TaskInput = ({ addTask }) => {
         value={task}
         placeholder='Add a todo item'
         onChange={handleInputValue} />
-        <button>+</button>
+        <button className='add'>+</button>
+        <button className='btn2'>Delete All</button>
     </form>
   )
 }

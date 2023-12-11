@@ -1,5 +1,4 @@
 import React from 'react';
-// import {MdDeleteSweep} from 'react-icons/md';
 
 const TaskItem = ({ task, deleteTask, toggleCheck }) => {
 
@@ -11,7 +10,6 @@ const TaskItem = ({ task, deleteTask, toggleCheck }) => {
             </input>
             <p className={task.checked? 'isChecked' : ''}>{task.taskName}</p>
         </div>
-        {/* <MdDeleteSweep className='delete-icon' */}
         <p onClick={() => deleteTask(task.taskName)}>X</p>
         
     </li>
