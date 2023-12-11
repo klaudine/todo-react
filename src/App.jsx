@@ -1,11 +1,104 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import TaskInput from "./components/TaskInput";
 import TaskItem from "./components/TaskItem";
 import Stats from "./components/Stats";
 
 
 function App() {
-const [toDoList, setToDoList] = useState([]);
+  const [toDoList, setToDoList] = useState([]);
+
+useEffect(() => {
+  const getData = async () => {
+    try {
+      const res = await fetch("https://playground.4geeks.com/apis/fake/todos/user/klaudine");
+      const data = await res.json();
+
+      if(!res.ok) {
+        console.log(data.description);
+        return;
+      }
+
+      console.log(data);
+    } catch(err) {
+      console.err(err);
+    }
+  }
+  getData()
+})
+
+  useEffect(() => {
+    const request = async () => {
+      try {
+        const res = await fetch("https://playground.4geeks.com/apis/fake/todos/user/klaudine", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify([]),
+        })
+        const data = await res.json();
+
+        if(!res.ok) {
+          console.log(data.description);
+          return;
+        }
+        console.log(data);
+
+      } catch(err) {
+        console.err(err)
+      }
+    }
+    request()
+  }, [])
+  
+
+  useEffect(() => {
+    const updateData = async () => {
+      try {
+        const res = await fetch("https://playground.4geeks.com/apis/fake/todos/user/klaudine", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify([]),
+        })
+        const data = await res.json();
+
+        if(!res.ok) {
+          console.log(data.description);
+          return;
+        }
+        console.log(data);
+
+      } catch(err) {
+        console.err(err)
+      }
+    }
+    updateData()
+  }, [])
+
+  useEffect(() => {
+    const deleteAll = async () => {
+      try {
+        const res = await fetch("https://playground.4geeks.com/apis/fake/todos/user/klaudine", {
+        method: "DELETE"
+      })
+        const data = await res.json();
+
+        if(!res.ok) {
+          console.log(data.description);
+          return;
+        }
+        console.log(data);
+
+      } catch(err) {
+        console.err(err)
+      }
+    }
+    deleteAll()
+  }, [])
+
+
 
 const addTask = (taskName) => {
   const newTask = { taskName, checked: false };
@@ -51,5 +144,6 @@ function toggleCheck(taskName){
     </>
   );
 }
+
 
 export default App;

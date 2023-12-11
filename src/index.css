@@ -45,11 +45,23 @@
   color: rgb(161, 160, 160);
 }
 
-.inputField button {
+.inputField .add {
   background: black;
   color: #fff;
   font-size: 1rem;
   width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10%;
+}
+
+.btn2 {
+  background: black;
+  color: #fff;
+  font-size: .75rem;
+  width: 65px;
   height: 20px;
   display: flex;
   align-items: center;
@@ -110,3 +122,4 @@ input[type='checkbox'] {
   padding: 10px;
   background:black;
 }
+
