@@ -14,17 +14,21 @@ useEffect(() => {
       const data = await res.json();
 
       if(!res.ok) {
-        console.log(data.description);
+        
+        console.log(data.description)
         return;
       }
 
+      setToDoList(data)
       console.log(data);
+
     } catch(err) {
       console.log(err);
     }
   }
   getData()
-})
+},[])
+
 
 
 
