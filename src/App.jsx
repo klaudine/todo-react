@@ -3,6 +3,23 @@ import TaskInput from "./components/TaskInput";
 import Stats from "./components/Stats";
 import ToDoList from "./components/ToDoList";
 
+async function createDb() {
+  try {
+    const res = await fetch("https://playground.4geeks.com/apis/fake/todos/user/klaudine", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: [],
+    })
+
+  } catch(err) {
+    console.log(err)
+  }
+}
+
+createDb()
+
 
 function App() {
   const [toDoList, setToDoList] = useState([]);
@@ -10,27 +27,20 @@ function App() {
 useEffect(() => {
   const getData = async () => {
     try {
-      const res = await fetch("https://playground.4geeks.com/apis/fake/todos/user/klaudine");
-      const data = await res.json();
-
-      if(!res.ok) {
-        
-        console.log(data.description)
-        return;
+        const res = await fetch("https://playground.4geeks.com/apis/fake/todos/user/klaudine");
+        const data = await res.json();
+  
+        setToDoList(data)
+        console.log(data);
+  
+      } catch(err) {
+        console.log(err);
       }
-
-      setToDoList(data)
-      console.log(data);
-
-    } catch(err) {
-      console.log(err);
     }
-  }
-  getData()
-},[])
 
+    getData()
 
-
+}, [])
 
 
     const updateData = async (newArray) => {
@@ -43,17 +53,27 @@ useEffect(() => {
         body: JSON.stringify(newArray),
         })
         const data = await res.json();
-
-        if(!res.ok) {
-          console.log(data.description);
-          return;
-        }
         console.log(data);
 
       } catch(err) {
         console.log(err)
       }
     }
+
+async function deleteUser() {
+  try {
+    const res = await fetch("https://playground.4geeks.com/apis/fake/todos/user/klaudine", {
+      method: "DELETE",
+      headers: {
+          "Content-Type": "application/json"
+        }
+    })
+    
+      } catch(err) {
+        console.log(err)
+      }
+    }
+  deleteUser();
 
 
   return (
@@ -65,11 +85,17 @@ useEffect(() => {
 
       <div className="toDoList">
         <span>To do</span>
-        <ToDoList toDoList={toDoList} setToDoList={setToDoList} updateData={updateData}/>
-
-        {toDoList.length === 0 ? (<p className="notify">All tasks completed!</p>) : null}
+        <ToDoList
+        toDoList={toDoList}
+        setToDoList={setToDoList}
+        updateData={updateData}/>
+        {toDoList.length === 0 ?
+        (<p className="notify">
+          All tasks completed!
+        </p>) : null}
       </div>
     </div>
+
     <Stats toDoList={toDoList} />
     </>
   );

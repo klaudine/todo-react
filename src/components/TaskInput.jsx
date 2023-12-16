@@ -14,12 +14,22 @@ const deleteAll = () => {
 
   return (
     <div className='inputField'>
-        <input type='text'
+      <input type='text'
         value={task}
         placeholder='Add a todo item'
-        onChange={(e) => setTask (e.target.value)} />
-        <button type='submit' className='add' onClick={()=> addToDo()}>+</button>
-        <button className='btn2'onClick={()=> deleteAll()} >Delete All</button>
+        onChange={(e) => setTask (e.target.value)}
+      />
+      <button
+        type='submit'
+        className='add'
+        onClick={addToDo}>
+        +
+      </button>
+      <button
+        className='btn2'
+        onClick={deleteAll}>
+          Delete All
+      </button>
     </div>
   )
 }
